@@ -1,10 +1,9 @@
 <script>
-
-	import { Button } from "$lib/ui/button";
-
+	import { Button } from '$lib/ui/button';
 </script>
+
 <div
-	class="container relative h-screen flex-col items-center justify-center grid lg:max-w-none lg:grid-cols-2 lg:px-0"
+	class="container relative grid h-screen flex-col items-center justify-center lg:max-w-none lg:grid-cols-2 lg:px-0"
 >
 	<Button
 		href="/examples/authentication"
@@ -22,20 +21,9 @@
 		/>
 		<div class="relative z-20 flex items-center text-lg font-medium">
 			<!-- <Command class="mr-2 h-6 w-6" /> -->
-			Acme Inc
+			Cw-insights
 		</div>
-		<div class="relative z-20 mt-auto">
-			<blockquote class="space-y-2">
-				<p class="text-lg">
-					&ldquo;This library has saved me countless hours of work and helped me deliver
-					stunning designs to my clients faster than ever before. Highly
-					recommended!&rdquo;
-				</p>
-				<footer class="text-sm">Sofia Davis</footer>
-			</blockquote>
-		</div>
+		<div class="relative z-20 mt-auto"></div>
 	</div>
-	<slot/>
+	<slot />
 </div>
-
-

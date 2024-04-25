@@ -1,5 +1,5 @@
 import User from "../../../models/user/user";
-import UserSession from "../../../models/user/user-session";
+import UserSession, { userSessionRelations } from "../../../models/user/user-session";
 import School, { schoolRelations } from "../../../models/school/school";
 import Program, { programRelations } from "../../../models/program/program";
 import UserProfileStudent, { userProfileStudentRelations } from "../../../models/user/user-profile-student";
@@ -17,6 +17,7 @@ export {
     userProfileStudentRelations,
     userProfileLecturerRelations,
     assesmentMarkRelations,
+    userSessionRelations,
     assesmentRelations,
     Assesment,
     AssesmentMark,

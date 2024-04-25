@@ -21,6 +21,7 @@
 		"@types/bcryptjs": "^2.4.6",
 		"@types/better-sqlite3": "^7.6.9",
 		"@types/eslint": "^8.56.0",
+		"@types/ua-parser-js": "^0.7.39",
 		"@types/uuid": "^9.0.8",
 		"@typescript-eslint/eslint-plugin": "^7.0.0",
 		"@typescript-eslint/parser": "^7.0.0",
@@ -62,6 +63,7 @@
 		"sveltekit-superforms": "^2.12.5",
 		"tailwind-merge": "^2.3.0",
 		"tailwind-variants": "^0.2.1",
+		"ua-parser-js": "^1.0.37",
 		"uuid": "^9.0.1",
 		"vaul-svelte": "^0.3.0",
 		"zod": "^3.22.5"

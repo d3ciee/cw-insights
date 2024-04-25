@@ -11,11 +11,9 @@
 	import { writable } from 'svelte/store';
 	import { DataTable, DataTableCheckbox } from '$lib/ui/data-table';
 	import DataTableActions from '$lib/ui/data-table/data-table-actions.svelte';
-	import AddCourseModal from '../_components/add-course-modal.svelte';
 	import type { PageData } from './$types';
 	import { Trash2, Copy, BookOpen, CircleOff, Presentation } from 'lucide-svelte';
 	import ConfirmDeleteModal from '../_components/confirm-delete-modal.svelte';
-
 	import * as Select from '$lib/ui/select';
 	import { goto } from '$app/navigation';
 	import { navigating } from '$app/stores';
@@ -23,19 +21,11 @@
 
 	export let data: PageData;
 
+	console.log(data);
+
 	const assignedCourses = data.assignedCourses?.map((s) => ({
 		value: s.id,
 		label: s.name
-	}));
-
-	const programs = data.programs?.map((s) => ({
-		value: s.id,
-		label: s.name
-	}));
-
-	const lecturers = data.lecturers?.map((l) => ({
-		value: l.employeeNumber,
-		label: l.firstName + ' ' + l.lastName
 	}));
 
 	type Assesment = {
@@ -161,7 +151,7 @@
 	let isAddassesmentModalOpen: boolean = false;
 </script>
 
-{#if data.error === 'no_program'}
+{#if data.error === 'no_course'}
 	<div class="mt-12 flex h-full w-full flex-col items-center justify-center">
 		<div class="flex h-min max-w-96 flex-col items-center justify-center text-center">
 			<div class="relative mb-6 flex h-36 w-36 items-center justify-center opacity-75">
@@ -169,8 +159,10 @@
 				<BookOpen class="z-40 h-20 w-20 opacity-100" />
 			</div>
 
-			<h1 class="text-xl font-bold tracking-tight">There are no programs</h1>
-			<p class="text-muted-foreground">Ask your admin to add a program to continue</p>
+			<h1 class="text-xl font-bold tracking-tight">You have not been assigned a course</h1>
+			<p class="text-muted-foreground">
+				Ask your HOD to assign you to one to continue. If you are an HOD, assign one to yourself
+			</p>
 		</div>
 	</div>
 {:else if data.error === 'no_lecturer'}

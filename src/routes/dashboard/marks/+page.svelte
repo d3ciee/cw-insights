@@ -57,9 +57,11 @@
 	let confirmDelete: boolean;
 	let toBeDeleted: string = '';
 
+	//@ts-ignore
 	let studentsWithmarks = writable<StudentWithMarks[]>(data.studentsWithAssesmentMarks);
 
 	$: if ($navigating?.complete) {
+		//@ts-ignore
 		if (data.programs) $studentsWithmarks = data.studentsWithAssesmentMarks;
 	}
 
@@ -160,7 +162,7 @@
 	let isAddassesmentModalOpen: boolean = false;
 </script>
 
-{#if data.error === 'no_program'}
+{#if data.error === 'no_course'}
 	<div class="mt-12 flex h-full w-full flex-col items-center justify-center">
 		<div class="flex h-min max-w-96 flex-col items-center justify-center text-center">
 			<div class="relative mb-6 flex h-36 w-36 items-center justify-center opacity-75">
@@ -168,8 +170,8 @@
 				<BookOpen class="z-40 h-20 w-20 opacity-100" />
 			</div>
 
-			<h1 class="text-xl font-bold tracking-tight">There are no programs</h1>
-			<p class="text-muted-foreground">Ask your admin to add a program to continue</p>
+			<h1 class="text-xl font-bold tracking-tight">You have not been assigned a course</h1>
+			<p class="text-muted-foreground">Ask your HOD to assign you to one to continue</p>
 		</div>
 	</div>
 {:else if data.error === 'no_lecturer'}

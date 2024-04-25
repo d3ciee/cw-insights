@@ -59,7 +59,7 @@ export const load = (async (e) => {
         where: ({ programId }, { eq }) => eq(programId, _course?.programId ?? ""),
         with: {
             marks: {
-                where: ({ assesmentId }, { eq, inArray }) => inArray(assesmentId, assesments.map((a) => a.id))
+                where: ({ assesmentId }, { eq, inArray }) => inArray(assesmentId, assesments.map((a) => a.id).concat("__SO it doesnt error"))
             }
         }
     })).map((s) => {

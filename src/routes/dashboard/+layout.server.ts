@@ -12,7 +12,8 @@ export const load = (async (e) => {
             { label: "Schools", path: "schools" },
             { label: "Programs", path: "programs" },
             { label: "Lecturers", path: "lecturers" },
-            { label: "Students", path: "students" }
+            { label: "Students", path: "students" },
+            { label: "Security manager", path: "security-manager" }
         ])
         .set("hod", [
             { label: "Courses", path: "courses" },

@@ -1,4 +1,6 @@
 import { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core';
+import User from './user';
+import { relations } from 'drizzle-orm';
 
 const UserSession = sqliteTable('user_sessions', {
     id: text('id').notNull().primaryKey(),
@@ -9,5 +11,13 @@ const UserSession = sqliteTable('user_sessions', {
     ipAddress: text('ip_address')
 });
 
+const userSessionRelations = relations(UserSession, ({ one }) => ({
+    user: one(User, {
+        references: [User.id],
+        fields: [UserSession.userId]
+    })
+}))
+
 export default UserSession;
+export { userSessionRelations }
 export type TUserSession = typeof UserSession.$inferSelect;
