@@ -171,7 +171,7 @@
 			</div>
 
 			<h1 class="text-xl font-bold tracking-tight">You have not been assigned a course</h1>
-			<p class="text-muted-foreground">Ask your HOD to assign you to one to continue</p>
+			<p class="text-muted-foreground">Ask your HOD to assign you to one to continue.  If you are an HOD, assign one to yourself</p>
 		</div>
 	</div>
 {:else if data.error === 'no_lecturer'}

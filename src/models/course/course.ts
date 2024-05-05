@@ -32,3 +32,5 @@ const courseRelations = relations(Course, ({ many, one }) => ({
 export default Course;
 export { courseRelations }
 export type TCourse = typeof Course.$inferSelect;
+
+

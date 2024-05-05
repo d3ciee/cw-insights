@@ -78,7 +78,7 @@
 
 <div class="flex-1 space-y-4 p-8 pt-6">
 	<div class="flex items-center justify-between space-y-2">
-		<h2 class="text-xl font-bold tracking-tight">My marks</h2>
+		<h2 class="text-xl font-bold tracking-tight">Security manager</h2>
 	</div>
 	<DataTable {columns} {table} {hideableCols} />
 </div>

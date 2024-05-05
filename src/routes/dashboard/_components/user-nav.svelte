@@ -38,7 +38,9 @@
 		</DropdownMenu.Label>
 		<DropdownMenu.Separator />
 		<DropdownMenu.Group>
-			<DropdownMenu.Item href="/auth/sign-out">Log out</DropdownMenu.Item>
+			<DropdownMenu.Item data-sveltekit-preload-data="off" href="/auth/sign-out"
+				>Log out</DropdownMenu.Item
+			>
 		</DropdownMenu.Group>
 	</DropdownMenu.Content>
 </DropdownMenu.Root>

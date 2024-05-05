@@ -23,7 +23,7 @@
 				<Card.Footer
 					class="flex h-9 items-center bg-primary p-0 px-4 text-center font-medium text-white"
 				>
-					<a href="/dashboard/skills"> Goto schools</a>
+					<a href="/dashboard/schools"> Goto schools</a>
 				</Card.Footer>
 			</Card.Root>
 
