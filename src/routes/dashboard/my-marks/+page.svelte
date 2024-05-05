@@ -8,7 +8,7 @@
 		addTableFilter
 	} from 'svelte-headless-table/plugins';
 	import { writable } from 'svelte/store';
-	import { DataTable, DataTableCheckbox } from '$lib/ui/data-table';
+	import { DataTable } from '$lib/ui/data-table';
 	import type { PageData } from './$types';
 	import { navigating } from '$app/stores';
 	import ViewMarksButton from './_components/view-marks-button.svelte';

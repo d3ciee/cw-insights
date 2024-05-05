@@ -63,7 +63,7 @@ export const load = (async (e) => {
                     }
                 }
             },
-            where: ({ assesmentId }, { inArray }) => inArray(assesmentId, courseAssesments.map((a) => a.id))
+            where: ({ assesmentId }, { inArray }) => inArray(assesmentId, courseAssesments.map((a) => a.id).concat("_ID"))
         })).map((m) => {
             return m.mark / 100 * m.assesment.weight / totalWeight
         }).reduce((x, y) => x + y, 0) * 100) / totalStudentsInCourse
@@ -79,7 +79,7 @@ export const load = (async (e) => {
                     }
                 }
             },
-            where: ({ assesmentId, studentId }, { inArray, and, eq }) => and(eq(studentId, studentProfile?.registrationNumber ?? ""), inArray(assesmentId, courseAssesments.map((a) => a.id)))
+            where: ({ assesmentId, studentId }, { inArray, and, eq }) => and(eq(studentId, studentProfile?.registrationNumber ?? ""), inArray(assesmentId, courseAssesments.map((a) => a.id).concat("_ID")))
         })).map((m) => {
             marks.push({
                 mark: m.mark,
@@ -105,79 +105,17 @@ export const load = (async (e) => {
 
     if (e.locals.user === null) throw error(400, "not_logged_in");
 
-    const cId = e.url.searchParams.get("courseId");
-    if (!cId) {
-        const course = await e.locals.db.query.Course.findFirst({
-            where: ({ assignedToId }, { eq }) => eq(assignedToId, "H220202J"),
-            columns: { id: true }
-        });
-        if (course)
-            throw redirect(302, "?courseId=" + course.id);
-        return {
-            error: "no_course"
-        }
-    }
-
-    const assignedCourses = await e.locals.db.query.Course.findMany({
-        columns: {
-            id: true,
-            name: true
-        },
-        where: ({ assignedToId }, { eq }) => eq(assignedToId, "H220202J"),
-
-    })
     const lecturers = await e.locals.db.query.UserProfileLecturer.findMany({})
 
     if (lecturers.length === 0) return {
         error: "no_lecturer"
     }
 
-    const assesments = await e.locals.db.query.Assesment.findMany({
-        where: ({ courseId }, { eq }) => eq(courseId, cId)
-    })
-
-    const _course = await e.locals.db.query.Course.findFirst({
-        where: ({ id }, { eq }) => eq(id, cId)
-    })
-
-    const studentsWithAssesmentMarks = (await e.locals.db.query.UserProfileStudent.findMany({
-        where: ({ programId }, { eq }) => eq(programId, _course?.programId ?? ""),
-        with: {
-            marks: {
-                where: ({ assesmentId }, { eq, inArray }) => inArray(assesmentId, assesments.map((a) => a.id))
-            }
-        }
-    })).map((s) => {
-        return {
-            ...s,
-            assesments: Object.fromEntries(assesments.map(a => {
-                const mark: number = s.marks.find(m => m.assesmentId === a.id)?.mark ?? 0;
-                return [a.id, {
-                    mark,
-                    ...a
-                }]
-            })),
-            total: (s.marks.map((sm) => {
-                const totalWeights = assesments.map(({ weight }) => weight).concat(0).reduce((x, y) => x + y);
-                const weight = assesments.find((a) => a.id === sm.assesmentId)?.weight ?? 0;
-                return sm.mark / 100 * weight / totalWeights;
-            }).concat(0).reduce((x, y) => x + y) * 100).toFixed(1)
-        }
-    })
-
-
     return {
         courseworkMarks
     };
 }) satisfies PageServerLoad;
 
-const validationSchema = z.object({
-    courseId: z.string({ required_error: "Course is required" }),
-    assignedAt: z.number({ required_error: "Assigned time is required" }),
-    due: z.number({ required_error: "Due time is required" }),
-    name: z.string({ required_error: "Assignment name is required" }),
-    weight: z.number({ required_error: "Course weight is required" }),
-});
 
 export const actions: Actions = {
     delete: async (e) => {
